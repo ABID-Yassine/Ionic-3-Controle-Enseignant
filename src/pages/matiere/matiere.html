@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img src="assets/btnmenu.png" style=" width: 35px; ">
+    </button>
+    <ion-title>Matiere</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="animates"  >
+
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--<ion-list #myElementitem >-->
+    <!--<ion-item *ngFor="let mat of matieres  ;let i=index"    >-->
+
+      <!--<h2> {{mat.nom_matiere}}</h2>-->
+      <!--<h3>{{mat.nom_salle}}</h3>-->
+      <!--<p>{{mat.abv}}</p>-->
+
+      <!--<button ion-button clear item-end>View</button>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <ion-searchbar (ionInput)="searchmatiere($event)"></ion-searchbar>
+
+  <ion-list *ngIf="matieres"  >
+        <ion-list-header>
+          Matiere
+        </ion-list-header>
+
+      <ion-item-sliding *ngFor="let mat of matieres ;let i=index" class=" animated fadeInLeft item-remove-animate item-avatar item-icon-right">
+        <ion-item  class="ionitem" >
+
+           <p><strong> Nom Matiere :</strong>{{mat.nom_matiere}}</p>
+         <p> <strong>Nom Salle :</strong> {{mat.nom_salle}}</p>
+          <p><strong>Abréviation :</strong> {{mat.abv}}</p>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button (click)="EditMatiere(mat)"  color="secondary" icon-start>
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button (click)="DeleteMatiere(mat.id)" ion-button color="danger" icon-start>
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+
+  </ion-list>
+
+  <div animates #animation="animates" text-center>
+    <button ion-button (click)="animation.start({type: 'rubberBand', duration: '1000'})">Click me!</button>
+  </div>
+
+  <ion-fab bottom right #fab>
+    <button ion-fab (click)="AddMatiere()"  style="background-color: #074d86;"><ion-icon name="add" ></ion-icon></button>
+  </ion-fab>
+
+</ion-content>
