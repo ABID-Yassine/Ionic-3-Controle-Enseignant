@@ -21,7 +21,7 @@ export class MatierePage {
       private animator: AnimationBuilder;
       matieres;
       dorefresh:any;
-      searchQuery: string = '';
+  searchQuery: string = '';
 
 
       constructor (public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {

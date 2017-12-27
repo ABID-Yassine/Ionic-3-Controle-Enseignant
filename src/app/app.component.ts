@@ -11,6 +11,7 @@ import {JourPage} from "../pages/jour/jour";
 import {EnseignantPage} from "../pages/enseignant/enseignant";
 import {DepPage} from "../pages/dep/dep";
 import {NiveauxPage} from "../pages/niveaux/niveaux";
+import {EnseignementPage} from "../pages/enseignement/enseignement";
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon:any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -28,17 +29,19 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
 
-      { title: 'login', component: LoginPage },
-      { title: 'Matiere', component: MatierePage },
-      { title: 'Salles', component: SallesPage },
-      { title: 'Seance', component: SeancePage },
-      { title: 'Departement', component: DepPage },
-      { title: 'Enseignant', component: EnseignantPage },
-      { title: 'Jour', component: JourPage },
-      { title: 'Niveaux', component: NiveauxPage }
+      { title: 'Matiere', component: MatierePage,icon:'book' },
+      { title: 'Salles', component: SallesPage ,icon:'clipboard'},
+      { title: 'Seance', component: SeancePage,icon:'calendar' },
+      { title: 'Departement', component: DepPage,icon:'briefcase' },
+      { title: 'Enseignant', component: EnseignantPage,icon:'contact' },
+      { title: 'Jour', component: JourPage,icon:'clock' },
+      { title: 'Niveaux', component: NiveauxPage ,icon:'home'},
+      { title: 'Enseignement', component: EnseignementPage ,icon:'school'}
+
     ];
 
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {

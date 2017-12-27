@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img src="assets/imgs/btnmenu.png" style=" width: 35px; ">
+    </button>
+    <ion-title>Enseignement</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="animates"  >
+
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--<ion-searchbar (ionInput)="searchmatiere($event)"></ion-searchbar>-->
+
+
+
+  <ion-list *ngIf="enseignements!=null">
+    <ion-list-header>
+      Enseignements
+    </ion-list-header>
+
+
+    <ion-item *ngFor="let ens of enseignements ;let i=index" class="ionitem animated fadeInLeft item-remove-animate item-avatar item-icon-right">
+
+      <ion-toggle checked="false" [(ngModel)]="isToggled" (ionChange)="sendmail(ens.id)" ></ion-toggle>
+
+      <ion-label (click)="showdetail(ens)">
+        <strong> Nom enseignement :</strong> <h2>{{ens.nom}}</h2>
+         <strong> Nom enseignant :</strong> <h2>{{ens.enseignant.nom}}</h2>
+      </ion-label>
+      <ion-thumbnail item-start (click)="showdetail(ens)">
+        <img src="../../assets/imgs/logo.png">
+      </ion-thumbnail>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-card *ngIf="enseignement!=null" >
+    <ion-card-header style=" background: #074d86; color: white; ">
+      <ion-icon style=" font-size: 42px; " name="contact" item-start></ion-icon>
+
+      <strong style=" font-size: 28px; ">{{enseignement.enseignant.nom}}</strong>
+    </ion-card-header>
+
+    <ion-list>
+      <button ion-item>
+        <ion-icon name="school" item-start></ion-icon>
+        <h2><strong> Nom Enseignement :</strong> {{enseignement.nom}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="book" item-start></ion-icon>
+        <h2><strong> Nom Matiere :</strong> {{enseignement.matiere.nom_matiere}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="clock" item-start></ion-icon>
+        <h2><strong> Jour :</strong> {{enseignement.jours.nom}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="briefcase" item-start></ion-icon>
+        <h2><strong> Nom Departement :</strong> {{enseignement.dep.nom}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="calendar" item-start></ion-icon>
+        <h2><strong> Nom seances :</strong> {{enseignement.seances.nom}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="home" item-start></ion-icon>
+        <h2><strong> Niveaux :</strong> {{enseignement.niveaux.nom}}</h2>
+      </button>
+
+      <button ion-item>
+        <ion-icon name="clipboard" item-start></ion-icon>
+        <h2><strong> Salle :</strong> {{enseignement.salle.nom}}</h2>
+      </button>
+    </ion-list>
+  </ion-card>
+
+
+
+
+
+
+
+  <!--<ion-fab bottom right #fab>-->
+    <!--<button ion-fab (click)="AddMatiere()"  style="background-color: #4CAF50;"><ion-icon name="add" ></ion-icon></button>-->
+  <!--</ion-fab>-->
+
+</ion-content>

@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content"  >
   <ion-header>
     <ion-toolbar style="
     background-image: url(http://i.telegraph.co.uk/multimedia/archive/02073/gr_2073908b.jpg);
@@ -12,8 +12,10 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)"  >
+        <ion-icon style=" font-size: 28px; " name="{{p.icon}}"></ion-icon>
         {{p.title}}
+
       </button>
     </ion-list>
   </ion-content>
