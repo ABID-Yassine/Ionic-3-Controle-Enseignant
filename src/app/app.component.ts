@@ -3,9 +3,14 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { MatierePage } from '../pages/matiere/matiere';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { MatierePage } from '../pages/matiere/matiere';
+import { SallesPage } from '../pages/salles/salles';
+import {SeancePage} from "../pages/seance/seance";
+import {JourPage} from "../pages/jour/jour";
+import {EnseignantPage} from "../pages/enseignant/enseignant";
+import {DepPage} from "../pages/dep/dep";
+import {NiveauxPage} from "../pages/niveaux/niveaux";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +30,12 @@ export class MyApp {
 
       { title: 'login', component: LoginPage },
       { title: 'Matiere', component: MatierePage },
-      { title: 'List', component: ListPage }
+      { title: 'Salles', component: SallesPage },
+      { title: 'Seance', component: SeancePage },
+      { title: 'Departement', component: DepPage },
+      { title: 'Enseignant', component: EnseignantPage },
+      { title: 'Jour', component: JourPage },
+      { title: 'Niveaux', component: NiveauxPage }
     ];
 
   }

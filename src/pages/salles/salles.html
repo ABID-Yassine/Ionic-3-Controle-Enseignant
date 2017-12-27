@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img src="assets/imgs/btnmenu.png" style=" width: 35px; ">
+    </button>
+    <ion-title>Matiere</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="animates"  >
+
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <ion-searchbar (ionInput)="searchSalle($event)"></ion-searchbar>
+
+  <ion-list   >
+    <ion-list-header>
+      Salle
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let salle of listsalle ;let i=index" class=" animated fadeInLeft item-remove-animate item-avatar item-icon-right">
+      <ion-item  class="ionitem" >
+        <h2><strong> Nom Salle :</strong> {{salle.nom}}</h2>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button (click)="EditSalle(salle)"  color="secondary" icon-start>
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button (click)="DeleteSalle(salle.id)" ion-button color="danger" icon-start>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+
+  <ion-fab bottom right #fab>
+    <button ion-fab (click)="AddSalle()"  style="background-color: #4CAF50;"><ion-icon name="add" ></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

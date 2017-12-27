@@ -21,7 +21,7 @@ export class MatierePage {
       private animator: AnimationBuilder;
       matieres;
       dorefresh:any;
-  searchQuery: string = '';
+      searchQuery: string = '';
 
 
       constructor (public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {
@@ -125,25 +125,18 @@ export class MatierePage {
               text: 'Editer',
               handler: data => {
                 if (  data.id!=null && data.abv!=null && data.nom_salle!=null && data.nom_matiere!=null ) {
-
-
                   let matiere=new Matiere();
-                  console.log("data"+data);
 
                   matiere.id=data.id;
                   matiere.abv=data.abv;
                   matiere.nom_salle= data.nom_salle;
                   matiere.nom_matiere=data.nom_matiere;
-                  console.log(matiere);
-
 
                   this.matiereService.editMatieres(matiere).then(data=>{
 
-                    console.log(this.matieres);
                   });
 
                   this.doRefresh(this.dorefresh);
-                  // this.matieres.push(matiere);
 
                 } else {
                   // invalid login
@@ -222,33 +215,15 @@ export class MatierePage {
 
 
   searchmatiere(ev: any) {
-    // Reset items back to all of the items
     this.getallmatiere();
-
-    // set val to the value of the searchbar
     let val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-
-
       this.matiereService.getMatieres().then(data=>{
         this.matieres = data;
         this.matieres =this.matieres.filter((data) => {
           return (data.nom_matiere.toLowerCase().indexOf(val.toLowerCase()) > -1);
         })
       });
-
-      // alert(this.matieres.length);
-      // for(let i = 0; i < this.matieres.length; i++) {
-      //   alert(this.matieres[i].nom_matiere);
-        // if(this.matieres[i].nom_matiere.toLowerCase().indexOf(val.toLowerCase()) > -1){
-        //   this.matieres.splice(i, 1);
-        //   alert(this.matieres[i].nom_matiere);
-        //   this.matieres=[];
-        // }
-      // }
-
 
     }
   }

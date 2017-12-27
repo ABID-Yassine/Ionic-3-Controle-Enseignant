@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
-// import { AuthService } from '../../providers/auth-service';
+import {NavController, AlertController, LoadingController, Loading, IonicPage, ToastController} from 'ionic-angular';
+import { RegistersService } from '../../services/register.service';
 
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
@@ -19,27 +19,48 @@ export class LoginPage {
   email:any;
   password:any;
 
-  constructor(public menuCtrl: MenuController,private nav: NavController,   private loadingCtrl: LoadingController) {
+  constructor(public toastCtrl: ToastController,private registersservice:RegistersService,public menuCtrl: MenuController,private nav: NavController,   private loadingCtrl: LoadingController) {
     this.menuCtrl.enable(false, 'authenticated');
     this.menuCtrl.close();
   }
 
-  public createAccount() {
+  public MatierePage() {
     this.nav.setRoot(MatierePage);
   }
 
   public login() {
-    this.showLoading()
-  }
 
-  showLoading() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true,
       duration: 1000
     });
-    this.loading.present();
+
+    let valpassowrd=this.password;
+    this.registersservice.Auth(this.email).then(data=>{
+
+      if(data["password"]==valpassowrd)
+        this.MatierePage();
+      else {
+        this.showtoast('Error Authentification !!');
+      }
+      this.loading.present();
+    });
   }
+
+
+  showtoast(val)
+  {
+    const toast = this.toastCtrl.create({
+      message: val,
+      showCloseButton: true,
+      closeButtonText: 'Ok',
+      cssClass: "classtoastCtrl",
+    });
+    toast.present();
+     
+  }
+
 
 
 }

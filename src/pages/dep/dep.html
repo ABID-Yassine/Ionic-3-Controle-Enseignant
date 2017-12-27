@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img src="assets/btnmenu.png" style=" width: 35px; ">
+    </button>
+    <ion-title>Dep</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="animates"  >
+
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--<ion-list #myElementitem >-->
+    <!--<ion-item *ngFor="let mat of matieres  ;let i=index"    >-->
+
+      <!--<h2> {{mat.nom_matiere}}</h2>-->
+      <!--<h3>{{mat.nom_salle}}</h3>-->
+      <!--<p>{{mat.abv}}</p>-->
+
+      <!--<button ion-button clear item-end>View</button>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <ion-searchbar (ionInput)="searchdep($event)"></ion-searchbar>
+
+  <ion-list *ngIf="deps"  >
+        <ion-list-header>
+          Departement
+        </ion-list-header>
+
+      <ion-item-sliding *ngFor="let dep of deps ;let i=index" class=" animated fadeInLeft item-remove-animate item-avatar item-icon-right">
+        <ion-item  class="ionitem" >
+
+           <p><strong> Département :</strong>{{dep.nom}}</p>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button (click)="EditDep(dep)"  color="secondary" icon-start>
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button (click)="DeleteDep(dep.id)" ion-button color="danger" icon-start>
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+
+  </ion-list>
+
+  <div animates #animation="animates" text-center>
+    <button ion-button (click)="animation.start({type: 'rubberBand', duration: '1000'})">Click me!</button>
+  </div>
+
+  <ion-fab bottom right #fab>
+    <button ion-fab (click)="AddDep()"  style="background-color: #074d86;"><ion-icon name="add" ></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

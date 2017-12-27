@@ -15,12 +15,26 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
+
+
 .toolbar-background-md {
-  border-color: #074d86;
-  background: #074d86;
-  color:white;
+  /* border-color: #074d86; */
+  background: none;
+  color: white;
 }
+
 
 .toolbar-title-md {
   color: white;
 }
+
+.list-md ion-item-sliding {
+  margin-top: 5px;
+  background-color: #fff;
+}
+.toolbar-md{ background-image: url(http://i.telegraph.co.uk/multimedia/archive/02073/gr_2073908b.jpg);
+  background-size: 100% 130px;  border-color: #074d86; background: #074d86;
+  color: white;}
+
+

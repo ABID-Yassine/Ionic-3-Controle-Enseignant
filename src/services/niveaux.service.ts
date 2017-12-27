@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Matiere } from "../entity/Matiere";
+import { Niveaux } from "../entity/Niveaux";
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -10,34 +10,37 @@ const headers = new HttpHeaders().set("Content-Type", "application/json")
   .set( 'Accept','application/json' ).set("X-CustomHeader", "custom header value");
 
 @Injectable()
-export class MatiereService {
+export class NiveauxService {
 
 
-  private _apiUrl = "http://localhost:8080/api/matiere";
+  private _apiUrl = "http://localhost:8080/api/niveaux";
 
   constructor(private http: HttpClient) {
   }
 
-  public getMatieres() {
+  public getNiveauxs() {
+
     return new Promise(resolve => {
       this.http.get(this._apiUrl ,{headers}).subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
         console.log(err);
       });
     });
+
+
   }
 
-  public  getMatiere(val:number): Observable<Matiere> {
-    return this.http.get<Matiere>(this._apiUrl+"/"+val);
+  public  getNiveaux(val:number): Observable<Niveaux> {
+    return this.http.get<Niveaux>(this._apiUrl+"/"+val);
   }
 
-  public setMatieres(mat:Matiere) {
+  public setNiveauxs(niveaux:Niveaux) {
+
+
     return new Promise(resolve => {
-      this.http.post(this._apiUrl,mat ,{headers}).subscribe(data => {
+      this.http.post(this._apiUrl,niveaux ,{headers}).subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
         console.log(err);
       });
@@ -46,28 +49,34 @@ export class MatiereService {
   }
 
 
-  public editMatieres(mat:Matiere) {
+  public editNiveauxs(niveaux:Niveaux) {
+
+
     return new Promise(resolve => {
-      this.http.post(this._apiUrl,mat ,{headers}).subscribe(data => {
+      this.http.post(this._apiUrl,niveaux ,{headers}).subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
         console.log(err);
       });
     });
+
+
+
   }
 
 
 
-  removeMatiere(idmat) {
+  removeNiveaux(idniveaux) {
+
+
     return new Promise(resolve => {
-      this.http.delete(this._apiUrl+'/'+idmat,{headers}).subscribe(data => {
+      this.http.delete(this._apiUrl+'/'+idniveaux,{headers}).subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
         console.log(err);
       });
     });
+
 
   }
 
