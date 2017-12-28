@@ -30,7 +30,9 @@
 
     <ion-item *ngFor="let ens of enseignements ;let i=index" class="ionitem animated fadeInLeft item-remove-animate item-avatar item-icon-right">
 
-      <ion-toggle checked="false" [(ngModel)]="isToggled" (ionChange)="sendmail(ens.id)" ></ion-toggle>
+      <!--<ion-toggle checked="false" [(ngModel)]="isToggled"  ></ion-toggle>-->
+
+      <ion-icon item-end    style=" font-size: 38px;  color: #074d86; " (click)="showdetail(ens)" name="eye"  ></ion-icon>
 
       <ion-label (click)="showdetail(ens)">
         <strong> Nom enseignement :</strong> <h2>{{ens.nom}}</h2>
@@ -86,6 +88,16 @@
         <ion-icon name="clipboard" item-start></ion-icon>
         <h2><strong> Salle :</strong> {{enseignement.salle.nom}}</h2>
       </button>
+
+
+      <div *ngIf="enseignement.mailsend  ; else elseBlock">
+        <button ion-button full disabled (click)="sendmail(enseignement.id,enseignement.enseignant.nom)" style=" background: #074d86; ">Send Email</button>
+
+      </div>
+      <ng-template #elseBlock>
+        <button ion-button full   (click)="sendmail(enseignement.id,enseignement.enseignant.nom)" style=" background: #074d86; ">Send Email</button>
+      </ng-template>
+
     </ion-list>
   </ion-card>
 
@@ -95,8 +107,9 @@
 
 
 
-  <!--<ion-fab bottom right #fab>-->
-    <!--<button ion-fab (click)="AddMatiere()"  style="background-color: #4CAF50;"><ion-icon name="add" ></ion-icon></button>-->
-  <!--</ion-fab>-->
+
+  <ion-fab bottom right #fab>
+    <button ion-fab (click)="getallEnseignements()"  style="background-color: #4CAF50;"><ion-icon name="eye" ></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

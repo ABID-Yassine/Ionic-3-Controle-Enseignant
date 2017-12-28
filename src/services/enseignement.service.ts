@@ -29,6 +29,18 @@ export class EnseignementService {
     });
   }
 
+
+  public sendMailEnseignements(id) {
+    return new Promise(resolve => {
+      this.http.get(this._apiUrl+"/mail/"+id ,{headers}).subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   // public  getEnseignement(val:number): Observable<Enseignement> {
   //   return this.http.get<Enseignement>(this._apiUrl+"/"+val);
   // }

@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Enseignement} from "../../entity/enseignement";
+import {Matiere} from "../../entity/Matiere";
 
 
 @IonicPage()
@@ -88,10 +89,28 @@ export class EnseignementPage {
   }
 
 
-  sendmail(val)
+  sendmail(val,nomens)
   {
-    alert(val);
 
+      let alert = this.atrCtrl.create({
+        title: 'Email send !',
+        subTitle: 'Enseignant '+nomens,
+        buttons: [
+          {
+          text: 'OK',
+          handler: data => {
+            this.enseignementService.sendMailEnseignements(val).then(data=>{
+
+            });
+                  this.getallEnseignements();
+          }
+        }
+        ]
+      });
+
+
+
+      alert.present();
   }
 
 }
