@@ -6,6 +6,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 
+import {UrlbaseService} from './urlbase.service';
+import {Matiere} from "../entity/Matiere";
+
+
 const headers = new HttpHeaders().set("Content-Type", "application/json")
   .set( 'Accept','application/json' ).set("X-CustomHeader", "custom header value");
 
@@ -13,11 +17,11 @@ const headers = new HttpHeaders().set("Content-Type", "application/json")
 export class EnseignementService {
 
 
-  private _apiUrl = "http://localhost:8080/api/enseignement";
 
-  constructor(private http: HttpClient) {
+  _apiUrl:any;
+  constructor(private http: HttpClient,private url:UrlbaseService) {
+    this._apiUrl = this.url.getapiUrl()+"/api/enseignement";
   }
-
   public getEnseignements() {
     return new Promise(resolve => {
       this.http.get(this._apiUrl ,{headers}).subscribe(data => {
@@ -41,47 +45,18 @@ export class EnseignementService {
     });
   }
 
-  // public  getEnseignement(val:number): Observable<Enseignement> {
-  //   return this.http.get<Enseignement>(this._apiUrl+"/"+val);
-  // }
-  //
-  // public setEnseignements(mat:Enseignement) {
-  //   return new Promise(resolve => {
-  //     this.http.post(this._apiUrl,mat ,{headers}).subscribe(data => {
-  //       resolve(data);
-  //       console.log(data);
-  //     }, err => {
-  //       console.log(err);
-  //     });
-  //   });
-  //
-  // }
-  //
-  //
-  // public editEnseignements(mat:Enseignement) {
-  //   return new Promise(resolve => {
-  //     this.http.post(this._apiUrl,mat ,{headers}).subscribe(data => {
-  //       resolve(data);
-  //       console.log(data);
-  //     }, err => {
-  //       console.log(err);
-  //     });
-  //   });
-  // }
-  //
-  //
-  //
-  // removeEnseignement(idmat) {
-  //   return new Promise(resolve => {
-  //     this.http.delete(this._apiUrl+'/'+idmat,{headers}).subscribe(data => {
-  //       resolve(data);
-  //       console.log(data);
-  //     }, err => {
-  //       console.log(err);
-  //     });
-  //   });
-  //
-  // }
+  public setEnseignements(ens:Enseignement) {
+    return new Promise(resolve => {
+      this.http.post(this._apiUrl,ens ,{headers}).subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+
+  }
+
 
 
 

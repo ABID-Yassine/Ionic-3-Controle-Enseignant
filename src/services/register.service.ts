@@ -5,17 +5,18 @@ import { Register } from "../entity/Register";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
+import {UrlbaseService} from './urlbase.service';
 
 const headers = new HttpHeaders().set("Content-Type", "application/json")
   .set( 'Accept','application/json' ).set("X-CustomHeader", "custom header value");
 @Injectable()
 export class RegistersService {
 
-  private _apiUrl = "http://localhost:8080/api/register";
+  _apiUrl:any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private url:UrlbaseService) {
+    this._apiUrl = this.url.getapiUrl()+"/api/register";
   }
-
 
   public Auth(email) {
     return new Promise(resolve => {

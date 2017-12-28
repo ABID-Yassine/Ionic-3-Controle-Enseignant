@@ -9,6 +9,8 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 import { AlertController } from 'ionic-angular';
 import {Enseignement} from "../../entity/enseignement";
 import {Matiere} from "../../entity/Matiere";
+import {AddEnseignementsPage} from "../add-enseignements/add-enseignements";
+import {MatierePage} from "../matiere/matiere";
 
 
 @IonicPage()
@@ -29,7 +31,7 @@ export class EnseignementPage {
   public isToggled: boolean;
 
 
-  constructor (public atrCtrl: AlertController,public navCtrl: NavController, public enseignementService: EnseignementService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+  constructor (private nav: NavController, public atrCtrl: AlertController,public navCtrl: NavController, public enseignementService: EnseignementService,public loadingCtrl: LoadingController, animationService: AnimationService) {
     this.animator = animationService.builder();
     this.isToggled = false;
   }
@@ -112,5 +114,15 @@ export class EnseignementPage {
 
       alert.present();
   }
+
+
+
+
+  /******  ADD Matiere *******/
+  addEnseignements() {
+    this.nav.push(AddEnseignementsPage);
+  }
+
+
 
 }

@@ -92,7 +92,6 @@
 
       <div *ngIf="enseignement.mailsend  ; else elseBlock">
         <button ion-button full disabled (click)="sendmail(enseignement.id,enseignement.enseignant.nom)" style=" background: #074d86; ">Send Email</button>
-
       </div>
       <ng-template #elseBlock>
         <button ion-button full   (click)="sendmail(enseignement.id,enseignement.enseignant.nom)" style=" background: #074d86; ">Send Email</button>
@@ -103,13 +102,9 @@
 
 
 
-
-
-
-
-
   <ion-fab bottom right #fab>
-    <button ion-fab (click)="getallEnseignements()"  style="background-color: #4CAF50;"><ion-icon name="eye" ></ion-icon></button>
+    <button ion-fab (click)="addEnseignements()"  style="background-color: #4CAF50;"><ion-icon name="add" ></ion-icon></button>
   </ion-fab>
+
 
 </ion-content>

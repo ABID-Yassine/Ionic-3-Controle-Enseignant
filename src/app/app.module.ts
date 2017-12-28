@@ -16,6 +16,7 @@ import { JourPage } from '../pages/jour/jour';
 import { EnseignantPage } from '../pages/enseignant/enseignant';
 import { NiveauxPage } from '../pages/niveaux/niveaux';
 import { EnseignementPage } from '../pages/enseignement/enseignement';
+import { AddEnseignementsPage } from '../pages/add-enseignements/add-enseignements';
 
 
 
@@ -28,6 +29,7 @@ import { JourService } from "../services/jour.service";
 import { SeanceService } from "../services/seance.service";
 import { NiveauxService } from "../services/niveaux.service";
 import { EnseignementService } from "../services/enseignement.service";
+import { UrlbaseService } from "../services/urlbase.service";
 
 
 import { AnimationService, AnimatesDirective } from 'css-animator';
@@ -45,7 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     JourPage,
     NiveauxPage,
     SeancePage,
-    EnseignementPage
+    EnseignementPage,
+    AddEnseignementsPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { HttpClientModule } from '@angular/common/http';
     EnseignantPage,
     NiveauxPage,
     SeancePage,
-    EnseignementPage
+    EnseignementPage,
+    AddEnseignementsPage
   ],
   providers:
     [
@@ -78,6 +82,7 @@ import { HttpClientModule } from '@angular/common/http';
       JourService,
       EnseignantService,
       EnseignementService,
+      UrlbaseService,
     AnimationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

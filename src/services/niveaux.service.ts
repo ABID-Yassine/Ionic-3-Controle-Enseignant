@@ -4,6 +4,7 @@ import { Niveaux } from "../entity/Niveaux";
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
+import {UrlbaseService} from './urlbase.service';
 
 
 const headers = new HttpHeaders().set("Content-Type", "application/json")
@@ -13,11 +14,11 @@ const headers = new HttpHeaders().set("Content-Type", "application/json")
 export class NiveauxService {
 
 
-  private _apiUrl = "http://localhost:8080/api/niveaux";
+  _apiUrl:any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private url:UrlbaseService) {
+    this._apiUrl = this.url.getapiUrl()+"/api/niveaux";
   }
-
   public getNiveauxs() {
 
     return new Promise(resolve => {

@@ -13,8 +13,8 @@
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)"  >
-        <ion-icon style=" font-size: 28px; " name="{{p.icon}}"></ion-icon>
-        {{p.title}}
+        <ion-icon style=" font-size: 28px;color: #074d86; " name="{{p.icon}}"></ion-icon>
+        <strong>{{p.title}}</strong>
 
       </button>
     </ion-list>

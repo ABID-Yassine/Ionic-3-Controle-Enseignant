@@ -1,0 +1,101 @@
+
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img src="assets/imgs/btnmenu.png" style=" width: 35px; ">
+    </button>
+    <ion-title>Add Enseignement</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>Nom Enseignement</ion-label>
+    <ion-input [(ngModel)]="valnom"></ion-input>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>enseignants</ion-label>
+    <ion-select [(ngModel)]="valenseignants"  >
+
+      <ion-option *ngFor="let zone of enseignants" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label color="primary" floating>Niveaux</ion-label>
+    <ion-select [(ngModel)]="valniv"  >
+
+      <ion-option *ngFor="let zone of niveaux" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>salles</ion-label>
+    <ion-select [(ngModel)]="valsalle"  >
+
+      <ion-option *ngFor="let zone of salles" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>seances</ion-label>
+    <ion-select  [(ngModel)]="valseance">
+      <ion-option *ngFor="let zone of seances" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>jours</ion-label>
+    <ion-select [(ngModel)]="valjour">
+      <ion-option *ngFor="let zone of jours" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>deps</ion-label>
+    <ion-select [(ngModel)]="valdep">
+      <ion-option *ngFor="let zone of deps" [value]="zone" >{{zone.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="primary" floating>Matieres</ion-label>
+    <ion-select [(ngModel)]="valmat">
+      <ion-option *ngFor="let zone of matieres" [value]="zone" >{{zone.nom_salle}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <button ion-button full (click)="addEnseignement()"  style=" background: #074d86; ">Add Enseignement</button>
+
+
+
+
+</ion-content>

@@ -4,7 +4,7 @@ import { Seance } from "../entity/Seance";
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-
+import {UrlbaseService} from './urlbase.service';
 
 const headers = new HttpHeaders().set("Content-Type", "application/json")
   .set( 'Accept','application/json' ).set("X-CustomHeader", "custom header value");
@@ -12,10 +12,11 @@ const headers = new HttpHeaders().set("Content-Type", "application/json")
 @Injectable()
 export class SeanceService {
 
+  _apiUrl:any;
 
-  private _apiUrl = "http://localhost:8080/api/seance";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private url:UrlbaseService) {
+  this._apiUrl = this.url.getapiUrl()+"/api/seance";
   }
 
   public getSeances() {
