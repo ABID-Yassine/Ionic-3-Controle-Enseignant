@@ -34,6 +34,18 @@ export class EnseignementService {
   }
 
 
+  public getEnseignementsToday() {
+    return new Promise(resolve => {
+      this.http.get(this._apiUrl+'/datetoday' ,{headers}).subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+
   public sendMailEnseignements(id) {
     return new Promise(resolve => {
       this.http.get(this._apiUrl+"/mail/"+id ,{headers}).subscribe(data => {

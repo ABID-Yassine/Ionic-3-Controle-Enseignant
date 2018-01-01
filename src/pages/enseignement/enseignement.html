@@ -14,6 +14,11 @@
 <ion-content padding="animates"  >
 
 
+
+
+  <button ion-button full   (click)="getEnseignementsToday()" style=" background: #074d86; ">Enseignements Today</button>
+
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

@@ -68,8 +68,17 @@ export class EnseignementPage {
     }, 1000);
   }
 
+  /******  get All Enseignements today *******/
+  getEnseignementsToday()
+  {
+    this.enseignements=[];
+    this.enseignement=null;
+    this.enseignementService.getEnseignementsToday().then(data=>{
+      this.enseignements= data;
+    });
+  }
 
-  /******  get All Matiere *******/
+  /******  get All Enseignements *******/
   getallEnseignements()
   {
     this.enseignements=[];
