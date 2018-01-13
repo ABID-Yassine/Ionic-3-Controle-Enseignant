@@ -1,19 +1,17 @@
 
-<ion-content class="login-content" padding >
+<ion-content class="login-content" padding   >
   <ion-row class="logo-row">
     <ion-col  col-3 col-md-5></ion-col>
-    <ion-col width-6 col-md-2 class=" animated zoomIn item-remove-animate item-avatar item-icon-right">
+    <ion-col width-6 col-md-2 class=" animated bounceInDown item-remove-animate item-avatar item-icon-right">
       <img src="assets/imgs/logo.png">
     </ion-col>
     <ion-col  col-3 col-md-5></ion-col>
   </ion-row>
-  <div class="login-box" col-md-4  >
-    <form (ngSubmit)="login()" #auth="ngForm" class="animated fadeIn ">
+  <div class=" animated bounceInUp  login-box" col-md-4  >
+    <form (ngSubmit)="login()" #auth="ngForm"  >
       <ion-row >
         <ion-col>
           <ion-list inset>
-
-
 
             <ion-item>
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="email"  required></ion-input>
@@ -29,10 +27,11 @@
       <ion-row>
         <ion-col class="signup-col">
           <button ion-button class="submit-btn" full type="submit" [disabled]="!auth.form.valid">Login</button>
-          <button ion-button class="register-btn" block clear (click)="MatierePage()">Create New Account</button>
+          <button ion-button class="register-btn" block clear (click)="dashPage()">Create New Account</button>
         </ion-col>
       </ion-row>
 
     </form>
   </div>
+
 </ion-content>

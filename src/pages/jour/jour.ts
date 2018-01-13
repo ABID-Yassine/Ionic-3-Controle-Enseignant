@@ -3,11 +3,11 @@ import { NavController } from 'ionic-angular';
 import { JourService } from './../../services/jour.service';
 
 
-import { LoadingController } from 'ionic-angular';
+import { LoadingController ,AlertController,MenuController  } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
-import { AlertController } from 'ionic-angular';
 import {Jour} from "../../entity/Jour";
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -24,17 +24,19 @@ export class JourPage {
   searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public jourService: JourService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public jourService: JourService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+        this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getalljour();
+
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -83,7 +85,7 @@ export class JourPage {
 
       EditJour(jour) {
         let alert = this.atrCtrl.create({
-          title: 'Add Departement',
+          title: 'Edit Departement',
           inputs: [
             {
               name: 'id',
@@ -203,6 +205,12 @@ export class JourPage {
 
 
     }
+  }
+
+
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

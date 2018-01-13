@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
-      <img src="assets/btnmenu.png" style=" width: 35px; ">
+      <img src="assets/imgs/btnmenu.png" style=" width: 35px; ">
     </button>
-    <ion-title>Dep</ion-title>
-    <ion-buttons end>
+    <ion-title>Departement</ion-title>
+    <ion-buttons end (click)="Logout()">
       <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
     </ion-buttons>
 
@@ -18,16 +18,6 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--<ion-list #myElementitem >-->
-    <!--<ion-item *ngFor="let mat of matieres  ;let i=index"    >-->
-
-      <!--<h2> {{mat.nom_matiere}}</h2>-->
-      <!--<h3>{{mat.nom_salle}}</h3>-->
-      <!--<p>{{mat.abv}}</p>-->
-
-      <!--<button ion-button clear item-end>View</button>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
   <ion-searchbar (ionInput)="searchdep($event)"></ion-searchbar>
 
   <ion-list *ngIf="deps"  >

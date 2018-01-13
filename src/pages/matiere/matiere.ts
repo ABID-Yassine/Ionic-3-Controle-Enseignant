@@ -1,9 +1,10 @@
+import { LoginPage } from './../login/login';
+
 import {Component, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController, LoadingController } from 'ionic-angular';
 import { MatiereService } from './../../services/matiere.service';
 
 
-import { LoadingController } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
@@ -21,20 +22,21 @@ export class MatierePage {
       private animator: AnimationBuilder;
       matieres;
       dorefresh:any;
-  searchQuery: string = '';
+      searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+        this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getallmatiere();
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -86,7 +88,7 @@ export class MatierePage {
       /******  Edit Matiere *******/
       EditMatiere(mat) {
         let alert = this.atrCtrl.create({
-          title: 'Add Matiere',
+          title: 'Edit Matiere',
           inputs: [
             {
               name: 'id',
@@ -226,6 +228,12 @@ export class MatierePage {
       });
 
     }
+  }
+
+
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

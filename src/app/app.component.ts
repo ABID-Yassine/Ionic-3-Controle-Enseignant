@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform ,MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,6 +13,8 @@ import {DepPage} from "../pages/dep/dep";
 import {NiveauxPage} from "../pages/niveaux/niveaux";
 import {EnseignementPage} from "../pages/enseignement/enseignement";
 
+import { Storage } from '@ionic/storage';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 @Component({
   templateUrl: 'app.html'
 })
@@ -23,12 +25,13 @@ export class MyApp {
 
   pages: Array<{title: string, component: any,icon:any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar/*, public splashScreen: SplashScreen*/) {
+  constructor(private storage: Storage,public platform: Platform, public statusBar: StatusBar/*, public splashScreen: SplashScreen*/) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
 
+      { title: 'Dashboard', component: DashboardPage,icon:'desktop' },
       { title: 'Matiere', component: MatierePage,icon:'book' },
       { title: 'Salles', component: SallesPage ,icon:'clipboard'},
       { title: 'Seance', component: SeancePage,icon:'calendar' },
@@ -39,6 +42,13 @@ export class MyApp {
       { title: 'Enseignement', component: EnseignementPage ,icon:'school'}
 
     ];
+
+    storage.get('connect').then((val) => {
+      //console.log('user connect', val);
+      if(val!=null)
+      this.nav.setRoot(DashboardPage);
+
+    });
 
   }
 

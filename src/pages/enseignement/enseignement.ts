@@ -3,15 +3,16 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import { EnseignementService } from './../../services/enseignement.service';
 
 
-import { LoadingController } from 'ionic-angular';
+import { LoadingController,AlertController,MenuController   } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
-
-import { AlertController } from 'ionic-angular';
+ 
 import {Enseignement} from "../../entity/enseignement";
 import {Matiere} from "../../entity/Matiere";
 import {AddEnseignementsPage} from "../add-enseignements/add-enseignements";
 import {MatierePage} from "../matiere/matiere";
+import { LoginPage } from '../login/login';
 
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -29,20 +30,37 @@ export class EnseignementPage {
   searchQuery: string = '';
 
   public isToggled: boolean;
+  stor:any;
 
-
-  constructor (private nav: NavController, public atrCtrl: AlertController,public navCtrl: NavController, public enseignementService: EnseignementService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+  constructor (public storage: Storage,public menuCtrl: MenuController,private nav: NavController, public atrCtrl: AlertController,public navCtrl: NavController, public enseignementService: EnseignementService,public loadingCtrl: LoadingController, animationService: AnimationService) {
     this.animator = animationService.builder();
+    this.stor=storage;
+    this.stor.get('admin').then((val) => { 
+      if(val==1)
+      this.menuCtrl.enable(true, 'myMenu');
+      else
+      this.menuCtrl.enable(false, 'myMenu');
+
+    });
+
+    //this.menuCtrl.enable(true, 'myMenu');
     this.isToggled = false;
   }
 
   ionViewDidEnter() {
+    this.stor.get('admin').then((val) => { 
+      if(val==1)
+      this.menuCtrl.enable(true, 'myMenu');
+      else
+      this.menuCtrl.enable(false, 'myMenu');
+
+    });
     let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 1000
+      content: "Please wait..." 
     });
     loader.present();
     this.getallEnseignements();
+    loader.dismiss();
 
     this.enseignement=null;
   }
@@ -132,6 +150,11 @@ export class EnseignementPage {
     this.nav.push(AddEnseignementsPage);
   }
 
+  
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
+  }
 
 
 }

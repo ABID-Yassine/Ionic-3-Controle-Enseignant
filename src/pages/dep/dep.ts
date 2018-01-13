@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { DepService } from './../../services/dep.service';
 
 
@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Dep} from "../../entity/Dep";
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -24,17 +25,19 @@ export class DepPage {
   searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public depService: DepService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public depService: DepService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+
+        this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getalldep();
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -83,7 +86,7 @@ export class DepPage {
 
       EditDep(dep) {
         let alert = this.atrCtrl.create({
-          title: 'Add Departement',
+          title: 'Edit Departement',
           inputs: [
             {
               name: 'id',
@@ -209,6 +212,13 @@ export class DepPage {
 
 
     }
+  }
+
+
+  Logout()
+  {
+
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

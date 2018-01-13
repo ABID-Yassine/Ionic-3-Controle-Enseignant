@@ -4,7 +4,7 @@
       <img src="assets/imgs/btnmenu.png" style=" width: 35px; ">
     </button>
     <ion-title>enseignant</ion-title>
-    <ion-buttons end>
+    <ion-buttons end (click)="Logout()">
       <button ion-button icon-only><ion-icon name="log-out" style=" color: white; font-size: 28px; "></ion-icon></button>
     </ion-buttons>
 
@@ -30,6 +30,8 @@
         <ion-item  class="ionitem" >
 
            <p><strong> enseignant :</strong>{{enseignant.nom}}</p>
+
+          <a  href="tel:{{enseignant.numero}}" ion-button clear item-end style="background: #4CAF50;padding: 20px;height: 50px;width: 50px;border-radius: 100%;">  <ion-icon name="call" style=" color: white; "></ion-icon></a>
         </ion-item>
         <ion-item-options>
           <button ion-button (click)="EditEnseignant(enseignant)"  color="secondary" icon-start>

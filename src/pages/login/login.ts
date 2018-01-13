@@ -1,16 +1,19 @@
+
 import { Component } from '@angular/core';
-import {NavController, AlertController, LoadingController, Loading, IonicPage, ToastController} from 'ionic-angular';
+import {MenuController,NavController, AlertController, LoadingController, Loading, IonicPage, ToastController} from 'ionic-angular';
 import { RegistersService } from '../../services/register.service';
 
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
-import { MatierePage } from '../matiere/matiere';
+import { DashboardPage } from '../dashboard/dashboard';
+import { EnseignementPage } from '../enseignement/enseignement';
+import { Storage } from '@ionic/storage';
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
-import { MenuController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
   loading: Loading;
@@ -18,15 +21,24 @@ export class LoginPage {
 
   email:any;
   password:any;
+  private animator: AnimationBuilder;
 
-  constructor(public toastCtrl: ToastController,private registersservice:RegistersService,public menuCtrl: MenuController,private nav: NavController,   private loadingCtrl: LoadingController) {
-    this.menuCtrl.enable(false, 'authenticated');
-    this.menuCtrl.close();
+  constructor(public  animationService: AnimationService,public storage: Storage,public toastCtrl: ToastController,private registersservice:RegistersService,public menuCtrl: MenuController,private nav: NavController,   private loadingCtrl: LoadingController) {
+    this.animator = animationService.builder();
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
-  public MatierePage() {
-    this.nav.setRoot(MatierePage);
+  ionViewDidLoad()
+  {
+    this.storage.get('connect').then((val) => {
+      //console.log('user connect', val);
+      if(val!=null)
+      this.storage.clear();
+    });
   }
+
+
+
 
   public login() {
 
@@ -37,17 +49,39 @@ export class LoginPage {
     });
 
     let valpassowrd=this.password;
+
+    if(this.email =="" && this.password=="")
+      this.showtoast('Error email and password !!');
+
     this.registersservice.Auth(this.email).then(data=>{
 
       if(data["password"]==valpassowrd)
-        this.MatierePage();
+      {
+
+        this.storage.set('connect', data["username"]);
+        this.storage.set('admin', data["admin"]);
+
+          if(data["admin"]==1)
+          this.nav.setRoot(DashboardPage);
+         else
+          this.nav.setRoot(EnseignementPage);
+
+      }
       else {
         this.showtoast('Error Authentification !!');
       }
       this.loading.present();
+    }).catch(() => {
+      this.showtoast('Error Authentification !!');
     });
-  }
 
+
+
+  }
+  dashPage()
+  {
+    this.nav.setRoot(DashboardPage);
+  }
 
   showtoast(val)
   {
@@ -58,7 +92,6 @@ export class LoginPage {
       cssClass: "classtoastCtrl",
     });
     toast.present();
-     
   }
 
 

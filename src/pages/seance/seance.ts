@@ -3,11 +3,11 @@ import { NavController } from 'ionic-angular';
 import { SeanceService } from './../../services/seance.service';
 
 
-import { LoadingController } from 'ionic-angular';
+import { LoadingController,AlertController,MenuController   } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
-import { AlertController } from 'ionic-angular';
 import {Seance} from "../../entity/Seance";
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -24,17 +24,19 @@ export class SeancePage {
   searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public seanceService: SeanceService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public seanceService: SeanceService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+        this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getallseance();
+
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -83,7 +85,7 @@ export class SeancePage {
 
       EditSeance(seance) {
         let alert = this.atrCtrl.create({
-          title: 'Add Seance',
+          title: 'Edit Seance',
           inputs: [
             {
               name: 'id',
@@ -216,6 +218,9 @@ export class SeancePage {
 
     }
   }
-
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
+  }
 }
 

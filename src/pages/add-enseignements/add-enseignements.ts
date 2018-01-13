@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,MenuController   } from 'ionic-angular';
 
 
 import { EnseignementService } from './../../services/enseignement.service';
@@ -17,6 +17,7 @@ import {Jour} from "../../entity/Jour";
 import {Dep} from "../../entity/Dep";
 import {Enseignement} from "../../entity/enseignement";
 import {NiveauxService} from "../../services/niveaux.service";
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -42,7 +43,7 @@ export class AddEnseignementsPage {
   valmat:any;
   valniv:any;
 
-  constructor( public enseignantService: EnseignantService,
+  constructor( public menuCtrl: MenuController,public enseignantService: EnseignantService,
                public sallesService: SallesService,
                public seanceService: SeanceService,
                public jourService: JourService,
@@ -60,6 +61,7 @@ export class AddEnseignementsPage {
     this.getalldep();
     this.getallmatiere();
     this.getallniveaux();
+    this.menuCtrl.enable(true, 'myMenu');
   }
 
   ionViewDidLoad() {
@@ -161,6 +163,9 @@ export class AddEnseignementsPage {
 
   }
 
-
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
+  }
 
 }

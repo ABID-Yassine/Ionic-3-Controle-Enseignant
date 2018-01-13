@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController,MenuController } from 'ionic-angular';
 import { SallesService } from './../../services/salles.service';
 
 
@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Salle} from "../../entity/Salle";
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -25,17 +26,19 @@ export class SallesPage {
   searchQuery: string = '';
 
 
-  constructor (public atrCtrl: AlertController,public navCtrl: NavController, public salleService: SallesService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+  constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public salleService: SallesService,public loadingCtrl: LoadingController, animationService: AnimationService) {
     this.animator = animationService.builder();
+    this.menuCtrl.enable(true, 'myMenu');
   }
 
   ionViewDidEnter() {
     let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 1000
+      content: "Please wait..."
     });
     loader.present();
     this.getallsalle();
+
+    loader.dismiss();
   }
 
   doRefresh(refresher) {
@@ -89,7 +92,7 @@ export class SallesPage {
   /******  Edit Matiere *******/
   EditSalle(mat) {
     let alert = this.atrCtrl.create({
-      title: 'Add Matiere',
+      title: 'Edit Matiere',
       inputs: [
         {
           name: 'id',
@@ -215,6 +218,12 @@ export class SallesPage {
 
 
     }
+  }
+
+
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

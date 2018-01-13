@@ -1,3 +1,4 @@
+ 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -17,6 +18,7 @@ import { EnseignantPage } from '../pages/enseignant/enseignant';
 import { NiveauxPage } from '../pages/niveaux/niveaux';
 import { EnseignementPage } from '../pages/enseignement/enseignement';
 import { AddEnseignementsPage } from '../pages/add-enseignements/add-enseignements';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 
 
@@ -29,11 +31,12 @@ import { JourService } from "../services/jour.service";
 import { SeanceService } from "../services/seance.service";
 import { NiveauxService } from "../services/niveaux.service";
 import { EnseignementService } from "../services/enseignement.service";
-import { UrlbaseService } from "../services/urlbase.service";
+import { UrlbaseService } from "../services/urlbase.service"; 
 
 
 import { AnimationService, AnimatesDirective } from 'css-animator';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -48,11 +51,13 @@ import { HttpClientModule } from '@angular/common/http';
     NiveauxPage,
     SeancePage,
     EnseignementPage,
-    AddEnseignementsPage
+    AddEnseignementsPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HttpClientModule
   ],
   bootstrap: [IonicApp],
@@ -67,7 +72,8 @@ import { HttpClientModule } from '@angular/common/http';
     NiveauxPage,
     SeancePage,
     EnseignementPage,
-    AddEnseignementsPage
+    AddEnseignementsPage,
+    DashboardPage
   ],
   providers:
     [
@@ -82,7 +88,7 @@ import { HttpClientModule } from '@angular/common/http';
       JourService,
       EnseignantService,
       EnseignementService,
-      UrlbaseService,
+      UrlbaseService, 
     AnimationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { EnseignantService } from './../../services/enseignant.service';
 
 
@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Enseignant} from "../../entity/Enseignant";
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -24,17 +25,19 @@ export class EnseignantPage {
   searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public enseignantService: EnseignantService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public enseignantService: EnseignantService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+
+         this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getallenseignant();
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -83,7 +86,7 @@ export class EnseignantPage {
 
       EditEnseignant(enseignant) {
         let alert = this.atrCtrl.create({
-          title: 'Add enseignant',
+          title: 'Edit enseignant',
           inputs: [
             {
               name: 'id',
@@ -96,6 +99,12 @@ export class EnseignantPage {
               placeholder: 'nom enseignant',
               type: 'text',
               value:enseignant.nom
+            },
+            {
+              name: 'numero',
+              placeholder: 'numero enseignant',
+              type: 'text',
+              value:enseignant.numero
             }
           ],
           buttons: [
@@ -109,7 +118,7 @@ export class EnseignantPage {
             {
               text: 'Editer',
               handler: data => {
-                if (  data.id!=null  && data.nom!=null  ) {
+                if (  data.id!=null  && data.nom!=null  && data.numero!=null  ) {
 
 
                   let enseignant=new Enseignant();
@@ -117,6 +126,7 @@ export class EnseignantPage {
 
                   enseignant.id=data.id;
                   enseignant.nom= data.nom;
+                  enseignant.numero= data.numero;
                   console.log(enseignant);
 
 
@@ -146,6 +156,11 @@ export class EnseignantPage {
               name: 'nom',
               placeholder: 'nom enseignant',
               type: 'text'
+            },
+            {
+              name: 'numero',
+              placeholder: 'numero enseignant',
+              type: 'text'
             }
           ],
           buttons: [
@@ -164,6 +179,7 @@ export class EnseignantPage {
 
                   let enseignant=new Enseignant();
                   enseignant.nom=data.nom;
+                  enseignant.numero=data.numero;
 
 
                   this.enseignantService.setEnseignants(enseignant).then(data=>{
@@ -205,6 +221,14 @@ export class EnseignantPage {
 
     }
   }
+
+
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
+  }
+
+
 
 }
 

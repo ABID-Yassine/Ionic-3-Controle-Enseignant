@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController ,MenuController } from 'ionic-angular';
 import { NiveauxService } from './../../services/niveaux.service';
 
 
@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Niveaux} from "../../entity/Niveaux";
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -24,17 +25,19 @@ export class NiveauxPage {
   searchQuery: string = '';
 
 
-      constructor (public atrCtrl: AlertController,public navCtrl: NavController, public niveauxService: NiveauxService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public niveauxService: NiveauxService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
+        this.menuCtrl.enable(true, 'myMenu');
        }
 
       ionViewDidEnter() {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
-          duration: 1000
+          content: "Please wait..."
         });
         loader.present();
         this.getallniveaux();
+
+        loader.dismiss();
       }
 
   doRefresh(refresher) {
@@ -82,7 +85,7 @@ export class NiveauxPage {
 
       EditNiveaux(niveaux) {
         let alert = this.atrCtrl.create({
-          title: 'Add niveaux',
+          title: 'Edit niveaux',
           inputs: [
             {
               name: 'id',
@@ -206,6 +209,11 @@ export class NiveauxPage {
 
 
     }
+  }
+
+  Logout()
+  {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
