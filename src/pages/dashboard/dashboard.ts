@@ -9,6 +9,8 @@ import { SallesService } from './../../services/salles.service';
 import { DepService } from './../../services/dep.service';
 import { Storage } from '@ionic/storage';
 
+import { AnimationService, AnimationBuilder } from 'css-animator';
+
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
@@ -20,7 +22,10 @@ export class DashboardPage {
   salles:any;
   deps:any;
   userconnect:any;
-  constructor(public storage: Storage,public depservice:DepService,public sallesService:SallesService,public enseignantService:EnseignantService,public matiereService: MatiereService,public menuCtrl: MenuController,public navCtrl: NavController, public navParams: NavParams) {
+
+  private animator: AnimationBuilder;
+
+  constructor(public storage: Storage,public depservice:DepService,public sallesService:SallesService,public enseignantService:EnseignantService,public matiereService: MatiereService,public menuCtrl: MenuController,public navCtrl: NavController, public navParams: NavParams, animationService: AnimationService) {
 
     this.menuCtrl.enable(true, 'myMenu');
 
