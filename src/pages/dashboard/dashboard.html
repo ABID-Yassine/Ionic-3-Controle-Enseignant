@@ -15,6 +15,11 @@
 
 <ion-content padding>
 
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
     <ion-card style="width: 97%;float: left;margin: 0px;margin-left: 1%;background: #074d86;background-color: #fff;padding: 4px;margin-bottom: 14px;" class=" animated zoomIn">
         <ion-item>
             <ion-icon class=" animated zoomIn" style="font-size: 38px;color: #074d86;" name="contact"></ion-icon>

@@ -9,6 +9,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 import { AlertController } from 'ionic-angular';
 import {Dep} from "../../entity/Dep";
 import { LoginPage } from '../login/login';
+import {Storage} from "@ionic/storage";
 
 
 @Component({
@@ -25,7 +26,9 @@ export class DepPage {
   searchQuery: string = '';
 
 
-      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public depService: DepService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public storage: Storage,public menuCtrl: MenuController,public atrCtrl: AlertController
+                   ,public navCtrl: NavController, public depService: DepService,
+                   public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
 
         this.menuCtrl.enable(true, 'myMenu');
@@ -217,7 +220,7 @@ export class DepPage {
 
   Logout()
   {
-
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 

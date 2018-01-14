@@ -9,6 +9,7 @@ export class Enseignement {
   public niveaux: number;
   public salle: number;
   public seance: number;
+  public date: Date;
 
   constructor(  ) {
 

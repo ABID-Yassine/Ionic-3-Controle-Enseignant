@@ -5,7 +5,7 @@ import { EnseignementService } from './../../services/enseignement.service';
 
 import { LoadingController,AlertController,MenuController   } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
- 
+
 import {Enseignement} from "../../entity/enseignement";
 import {Matiere} from "../../entity/Matiere";
 import {AddEnseignementsPage} from "../add-enseignements/add-enseignements";
@@ -35,7 +35,7 @@ export class EnseignementPage {
   constructor (public storage: Storage,public menuCtrl: MenuController,private nav: NavController, public atrCtrl: AlertController,public navCtrl: NavController, public enseignementService: EnseignementService,public loadingCtrl: LoadingController, animationService: AnimationService) {
     this.animator = animationService.builder();
     this.stor=storage;
-    this.stor.get('admin').then((val) => { 
+    this.stor.get('admin').then((val) => {
       if(val==1)
       this.menuCtrl.enable(true, 'myMenu');
       else
@@ -48,7 +48,7 @@ export class EnseignementPage {
   }
 
   ionViewDidEnter() {
-    this.stor.get('admin').then((val) => { 
+    this.stor.get('admin').then((val) => {
       if(val==1)
       this.menuCtrl.enable(true, 'myMenu');
       else
@@ -56,7 +56,7 @@ export class EnseignementPage {
 
     });
     let loader = this.loadingCtrl.create({
-      content: "Please wait..." 
+      content: "Please wait..."
     });
     loader.present();
     this.getallEnseignements();
@@ -150,9 +150,10 @@ export class EnseignementPage {
     this.nav.push(AddEnseignementsPage);
   }
 
-  
+
   Logout()
   {
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 

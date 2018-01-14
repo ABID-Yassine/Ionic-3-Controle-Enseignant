@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import {Jour} from "../../entity/Jour";
 import { LoginPage } from '../login/login';
+import {Storage} from "@ionic/storage";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class JourPage {
   searchQuery: string = '';
 
 
-      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public jourService: JourService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public storage: Storage,public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public jourService: JourService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
         this.menuCtrl.enable(true, 'myMenu');
        }
@@ -210,6 +211,7 @@ export class JourPage {
 
   Logout()
   {
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 

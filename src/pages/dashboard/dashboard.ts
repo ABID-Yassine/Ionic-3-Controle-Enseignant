@@ -9,7 +9,6 @@ import { SallesService } from './../../services/salles.service';
 import { DepService } from './../../services/dep.service';
 import { Storage } from '@ionic/storage';
 
-import { AnimationService, AnimationBuilder } from 'css-animator';
 
 @IonicPage()
 @Component({
@@ -23,13 +22,25 @@ export class DashboardPage {
   deps:any;
   userconnect:any;
 
-  private animator: AnimationBuilder;
+  dorefresh:any;
 
-  constructor(public storage: Storage,public depservice:DepService,public sallesService:SallesService,public enseignantService:EnseignantService,public matiereService: MatiereService,public menuCtrl: MenuController,public navCtrl: NavController, public navParams: NavParams, animationService: AnimationService) {
+
+
+
+  constructor(public storage: Storage,public depservice:DepService,public sallesService:SallesService,
+              public enseignantService:EnseignantService,public matiereService: MatiereService,
+              public menuCtrl: MenuController,public navCtrl: NavController,
+              public navParams: NavParams ) {
 
     this.menuCtrl.enable(true, 'myMenu');
 
 
+
+
+  }
+
+
+  ionViewDidEnter() {
     this.matiereService.getMatieres().then(data=>{
       this.matieres= data;
     });
@@ -53,18 +64,18 @@ export class DashboardPage {
       this.userconnect=val;
 
     });
-
-
-
-
   }
 
-  ionViewDidLoad() {
+  doRefresh(refresher) {
+    this.dorefresh=refresher;
+      this.ionViewDidEnter();
+      refresher.complete();
   }
 
 
   Logout()
   {
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 

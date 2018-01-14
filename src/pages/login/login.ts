@@ -30,11 +30,10 @@ export class LoginPage {
 
   ionViewDidLoad()
   {
-    this.storage.get('connect').then((val) => {
-      //console.log('user connect', val);
-      if(val!=null)
-      this.storage.clear();
-    });
+      this.storage.get('Logout').then((val) => {
+        if(val==true)
+         this.storage.clear();
+      });
   }
 
 
@@ -60,6 +59,7 @@ export class LoginPage {
 
         this.storage.set('connect', data["username"]);
         this.storage.set('admin', data["admin"]);
+        this.storage.set('Logout',false);
 
           if(data["admin"]==1)
           this.nav.setRoot(DashboardPage);

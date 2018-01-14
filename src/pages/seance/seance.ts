@@ -8,6 +8,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import {Seance} from "../../entity/Seance";
 import { LoginPage } from '../login/login';
+import {Storage} from "@ionic/storage";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class SeancePage {
   searchQuery: string = '';
 
 
-      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public seanceService: SeanceService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public storage: Storage,public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public seanceService: SeanceService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
         this.menuCtrl.enable(true, 'myMenu');
        }
@@ -220,6 +221,7 @@ export class SeancePage {
   }
   Logout()
   {
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 }

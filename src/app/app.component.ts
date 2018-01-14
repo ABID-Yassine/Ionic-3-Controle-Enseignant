@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform ,MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-// import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { LoginPage } from '../pages/login/login';
 import { MatierePage } from '../pages/matiere/matiere';
 import { SallesPage } from '../pages/salles/salles';
@@ -25,10 +23,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any,icon:any}>;
 
-  constructor(private storage: Storage,public platform: Platform, public statusBar: StatusBar/*, public splashScreen: SplashScreen*/) {
+  constructor(private storage: Storage,public platform: Platform, public statusBar: StatusBar ) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
 
       { title: 'Dashboard', component: DashboardPage,icon:'desktop' },
@@ -40,13 +37,18 @@ export class MyApp {
       { title: 'Jour', component: JourPage,icon:'clock' },
       { title: 'Niveaux', component: NiveauxPage ,icon:'home'},
       { title: 'Enseignement', component: EnseignementPage ,icon:'school'}
-
     ];
 
-    storage.get('connect').then((val) => {
-      //console.log('user connect', val);
-      if(val!=null)
-      this.nav.setRoot(DashboardPage);
+    storage.get('Logout').then((val) => {
+      if(val==false) {
+        storage.get('admin').then((adm) => {
+          if(adm!=null)
+            this.nav.setRoot(DashboardPage);
+          else
+            this.nav.setRoot(EnseignementPage);
+
+        });
+      }
 
     });
 
@@ -55,16 +57,11 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-     // this.splashScreen.hide();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 }

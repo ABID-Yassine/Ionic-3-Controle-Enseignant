@@ -42,6 +42,7 @@ export class AddEnseignementsPage {
   valdep:any;
   valmat:any;
   valniv:any;
+  valDate:any;
 
   constructor( public menuCtrl: MenuController,public enseignantService: EnseignantService,
                public sallesService: SallesService,
@@ -151,6 +152,7 @@ export class AddEnseignementsPage {
     enseignement.departement=this.valdep.id;
     enseignement.niveaux=this.valniv.id;
     enseignement.nom=this.valnom;
+    enseignement.date=this.valDate;
 
     console.log(enseignement);
 

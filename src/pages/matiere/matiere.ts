@@ -9,6 +9,7 @@ import { AnimationService, AnimationBuilder } from 'css-animator';
 
 import { AlertController } from 'ionic-angular';
 import {Matiere} from "../../entity/Matiere";
+import {Storage} from "@ionic/storage";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class MatierePage {
       searchQuery: string = '';
 
 
-      constructor (public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {
+      constructor (public storage: Storage,public menuCtrl: MenuController,public atrCtrl: AlertController,public navCtrl: NavController, public matiereService: MatiereService,public loadingCtrl: LoadingController, animationService: AnimationService) {
         this.animator = animationService.builder();
         this.menuCtrl.enable(true, 'myMenu');
        }
@@ -233,6 +234,7 @@ export class MatierePage {
 
   Logout()
   {
+    this.storage.set('Logout', true);
     this.navCtrl.setRoot(LoginPage);
   }
 
