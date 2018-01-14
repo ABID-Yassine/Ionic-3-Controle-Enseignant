@@ -23,7 +23,6 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--<ion-searchbar (ionInput)="searchmatiere($event)"></ion-searchbar>-->
 
 
 
@@ -55,13 +54,21 @@
     <ion-card-header style=" background: #074d86; color: white; ">
       <ion-icon style=" font-size: 42px; " name="contact" item-start></ion-icon>
 
-      <strong style=" font-size: 28px; ">{{enseignement.enseignant.nom}}</strong>
+      <strong style=" font-size: 28px;margin-left: 5px; ">{{enseignement.enseignant.nom}}</strong>
+
+      <a  href="mailto:{{enseignement.enseignant.email}}"><ion-icon class=" animated zoomIn   stylemail"   name="mail"></ion-icon></a>
+
+
+
+
     </ion-card-header>
 
-    <ion-list>
+
+
+    <ion-list style="margin-top: 10px">
       <button ion-item>
         <ion-icon name="school" item-start></ion-icon>
-        <h2><strong> Nom Enseignement :</strong> {{enseignement.nom}}</h2>
+        <h2><strong  > Nom Enseignement :</strong> {{enseignement.nom}}</h2>
       </button>
 
       <button ion-item>

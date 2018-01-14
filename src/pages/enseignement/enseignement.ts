@@ -6,10 +6,7 @@ import { EnseignementService } from './../../services/enseignement.service';
 import { LoadingController,AlertController,MenuController   } from 'ionic-angular';
 import { AnimationService, AnimationBuilder } from 'css-animator';
 
-import {Enseignement} from "../../entity/enseignement";
-import {Matiere} from "../../entity/Matiere";
 import {AddEnseignementsPage} from "../add-enseignements/add-enseignements";
-import {MatierePage} from "../matiere/matiere";
 import { LoginPage } from '../login/login';
 
 import { Storage } from '@ionic/storage';
@@ -43,7 +40,6 @@ export class EnseignementPage {
 
     });
 
-    //this.menuCtrl.enable(true, 'myMenu');
     this.isToggled = false;
   }
 
@@ -137,18 +133,19 @@ export class EnseignementPage {
         ]
       });
 
-
-
       alert.present();
   }
 
 
 
 
-  /******  ADD Matiere *******/
+  /******  ADD Enseignements *******/
   addEnseignements() {
     this.nav.push(AddEnseignementsPage);
   }
+
+
+
 
 
   Logout()
